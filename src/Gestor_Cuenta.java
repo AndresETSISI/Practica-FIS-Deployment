@@ -38,21 +38,27 @@ public class Gestor_Cuenta
   /** */
   public Gestor_Cuenta()
   {
+	  //se inicializa el array de cuentas
 	  cuentas = new ArrayList<Cuenta>();
 	  
+	  // creamos parseador de JSON
 	  JSONParser parser = new JSONParser();
 		
 		try {
-			
+			//abrimos y parseamos el fichero json con el parseador (2 instrucciones)
 			Object obj = parser.parse(new FileReader("Usuarios.json"));
 			JSONArray users = (JSONArray) obj;
 			
+			//creamos el iterador para recorrer los usuarios del fichero JSON ya parseado
 			Iterator<JSONObject> iter = users.iterator();
 			
+			//mientras que queden usuarios en el fichero JSON
 			while(iter.hasNext()) {
 			
+				//sacamos un usuario
 				JSONObject usuario = (JSONObject) iter.next();
 				
+				//sacamos todos sus atributos
 				String alias = (String) usuario.get("alias");
 				String correo = (String) usuario.get("correo");
 				String contrasenia = (String) usuario.get("contrasenia");
@@ -61,10 +67,12 @@ public class Gestor_Cuenta
 				ArrayList<Comentario> comentarios = (ArrayList<Comentario>) usuario.get("comentarios");
 				ArrayList<Cuenta> usuarios = (ArrayList<Cuenta>) usuario.get("usuarios");
 				
+				//creamos la cuenta con los atributos del usuario
 				Cuenta nueva_cuenta = new Cuenta(alias,correo ,contrasenia ,comunidades ,publicaciones ,comentarios ,usuarios);
+				
+				//y la añadimos a la coleccion de cuentas
 				cuentas.add(nueva_cuenta);
 				
-			
 			}
 			
 			
