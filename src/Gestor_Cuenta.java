@@ -59,9 +59,9 @@ public class Gestor_Cuenta
 				ArrayList<Comunidad> comunidades = (ArrayList<Comunidad>) usuario.get("comunidades");
 				ArrayList<Publicacion> publicaciones = (ArrayList<Publicacion>) usuario.get("publicaciones");
 				ArrayList<Comentario> comentarios = (ArrayList<Comentario>) usuario.get("comentarios");
-				//JSONObject usuarios = (JSONObject)users.get("usuarios");
+				ArrayList<Cuenta> usuarios = (ArrayList<Cuenta>) usuario.get("usuarios");
 				
-				Cuenta nueva_cuenta = new Cuenta(alias,correo ,contrasenia ,comunidades ,publicaciones ,comentarios /*,usuarios*/ );
+				Cuenta nueva_cuenta = new Cuenta(alias,correo ,contrasenia ,comunidades ,publicaciones ,comentarios ,usuarios);
 				cuentas.add(nueva_cuenta);
 				
 			

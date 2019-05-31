@@ -70,7 +70,7 @@ public class Cuenta
 	}
   
   	/** */
-  	public Cuenta(String alias, String correo, String contrasenia,ArrayList<Comunidad> comunidades,ArrayList<Publicacion> publicaciones,ArrayList<Comentario> comentarios /*,ArrayList<Cuenta> usuarios*/) //Segundo contructor de cuenta
+  	public Cuenta(String alias, String correo, String contrasenia,ArrayList<Comunidad> comunidades,ArrayList<Publicacion> publicaciones,ArrayList<Comentario> comentarios ,ArrayList<Cuenta> usuarios) //Segundo contructor de cuenta
   	{
 	 
 	  this.alias = alias;
