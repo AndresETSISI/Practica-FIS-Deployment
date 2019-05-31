@@ -1,9 +1,14 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 //
 //
@@ -34,6 +39,45 @@ public class Gestor_Cuenta
   public Gestor_Cuenta()
   {
 	  cuentas = new ArrayList<Cuenta>();
+	  
+	  JSONParser parser = new JSONParser();
+		
+		try {
+			
+			Object obj = parser.parse(new FileReader("Usuarios.json"));
+			JSONArray users = (JSONArray) obj;
+			
+			Iterator<JSONObject> iter = users.iterator();
+			
+			while(iter.hasNext()) {
+			
+				JSONObject usuario = (JSONObject) iter.next();
+				
+				String alias = (String) usuario.get("alias");
+				String correo = (String) usuario.get("correo");
+				String contrasenia = (String) usuario.get("contrasenia");
+				ArrayList<Comunidad> comunidades = (ArrayList<Comunidad>) usuario.get("comunidades");
+				ArrayList<Publicacion> publicaciones = (ArrayList<Publicacion>) usuario.get("publicaciones");
+				ArrayList<Comentario> comentarios = (ArrayList<Comentario>) usuario.get("comentarios");
+				//JSONObject usuarios = (JSONObject)users.get("usuarios");
+				
+				Cuenta nueva_cuenta = new Cuenta(alias,correo ,contrasenia ,comunidades ,publicaciones ,comentarios /*,usuarios*/ );
+				cuentas.add(nueva_cuenta);
+				
+			
+			}
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	  
 	  //Servidor_UPM = new Servidor_UPM();
   }

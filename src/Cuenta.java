@@ -69,6 +69,20 @@ public class Cuenta
 	  
 	}
   
+  	/** */
+  	public Cuenta(String alias, String correo, String contrasenia,ArrayList<Comunidad> comunidades,ArrayList<Publicacion> publicaciones,ArrayList<Comentario> comentarios /*,ArrayList<Cuenta> usuarios*/) //Segundo contructor de cuenta
+  	{
+	 
+	  this.alias = alias;
+	  this.correo = correo;
+	  this.contrasenia = contrasenia;
+	  this.comunidades = comunidades;
+	  this.publicaciones = publicaciones;
+	  this.comentarios = comentarios;
+	  this.usuarios = null;
+	  //this.factoryPublicacion = new Factory_Publicion();
+	 }
+  
   public JSONObject guardarDatos() { //crea el formato JSON de las cuentas y lo devuelve
 	  
 	  
@@ -77,8 +91,8 @@ public class Cuenta
 		usuario.put("correo", this.correo);
 		usuario.put("contrasenia", this.contrasenia);
 		usuario.put("Comunidades", comunidades);
-		usuario.put("comentariosJSON", comentarios);
-		usuario.put("usuariosJSON", usuarios);
+		usuario.put("comentarios", comentarios);
+		usuario.put("usuarios", usuarios);
 		
 		
 		
