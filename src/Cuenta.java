@@ -53,7 +53,11 @@ public class Cuenta
   /** */
   public Cuenta()
   {
+	  System.out.println("Escriba Alias:");
+	  this.alias = scan.nextLine();
+	  System.out.println("Escriba Correo:");
 	  this.correo = scan.nextLine();
+	  System.out.println("Escriba Contrasenia:");
 	  this.contrasenia = scan.nextLine();
 	  this.comunidades = new ArrayList<Comunidad>();
 	  this.publicaciones = new ArrayList<Publicacion>();
@@ -68,19 +72,14 @@ public class Cuenta
   
   private void guardarDatos() {
 	  
-	  JSONArray comunidadesJSON = (JSONArray) this.comunidades;
-	  JSONArray publicacionesJSON = (JSONArray) this.publicaciones;
-	  JSONArray comentariosJSON = (JSONArray) this.comentarios;
-	  JSONArray usuariosJSON = (JSONArray) this.usuarios;
-	  
 	  
 	  JSONObject usuario = new JSONObject();
 		usuario.put("alias", this.alias);
 		usuario.put("correo", this.correo);
 		usuario.put("contrasenia", this.contrasenia);
-		usuario.put("Comunidades", comunidadesJSON);
-		usuario.put("comentariosJSON", comentariosJSON);
-		usuario.put("usuariosJSON", usuariosJSON);
+		usuario.put("Comunidades", comunidades);
+		usuario.put("comentariosJSON", comentarios);
+		usuario.put("usuariosJSON", usuarios);
 		
 		try(FileWriter file = new FileWriter("Usuarios.json")){
 			file.write(usuario.toJSONString());
@@ -116,7 +115,7 @@ public void setContrasenia(String contrasenia) {
 	contrasenia = contrasenia;
 }
 
-public Comunidad getComunidades() {
+public ArrayList<Comunidad> getComunidades() {
 	return comunidades;
 }
 
