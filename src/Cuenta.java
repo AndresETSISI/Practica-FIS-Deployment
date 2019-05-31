@@ -1,4 +1,11 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 
 //
 //
@@ -17,112 +24,144 @@ import java.util.ArrayList;
 /** */
 public class Cuenta
 {
+	
+  private Scanner scan = new Scanner(System.in);
   /** */
-  private String Correo;
+  private String correo;
   
   /** */
-  private String Alias;
+  private String alias;
   
   /** */
-  private String Contrasenia;
+  private String contrasenia;
   
   /** */
-  private Comunidad Comunidades;
+  private ArrayList<Comunidad> comunidades;
   
   /** */
-  private ArrayList<Publicacion> Publicaciones;
+  private ArrayList<Publicacion> publicaciones;
   
   /** */
-  private ArrayList<Comentario> Comentarios;
+  private ArrayList<Comentario> comentarios;
   
   /** */
-  private ArrayList<Cuenta> Usuarios;
+  private ArrayList<Cuenta> usuarios;
   
   /** */
-  private Factory_Publicacion FactoryPublicacion;
+  private Factory_Publicacion factoryPublicacion;
+  
+  /** */
+  public Cuenta()
+  {
+	  this.correo = scan.nextLine();
+	  this.contrasenia = scan.nextLine();
+	  this.comunidades = new ArrayList<Comunidad>();
+	  this.publicaciones = new ArrayList<Publicacion>();
+	  this.comentarios = new ArrayList<Comentario>();
+	  this.usuarios = new ArrayList<Cuenta>();
+	  //this.factoryPublicacion = new Factory_Publicion();
+	  
+	  guardarDatos();
+	  
+	  
+	}
+  
+  private void guardarDatos() {
+	  
+	  JSONArray comunidadesJSON = (JSONArray) this.comunidades;
+	  JSONArray publicacionesJSON = (JSONArray) this.publicaciones;
+	  JSONArray comentariosJSON = (JSONArray) this.comentarios;
+	  JSONArray usuariosJSON = (JSONArray) this.usuarios;
+	  
+	  
+	  JSONObject usuario = new JSONObject();
+		usuario.put("alias", this.alias);
+		usuario.put("correo", this.correo);
+		usuario.put("contrasenia", this.contrasenia);
+		usuario.put("Comunidades", comunidadesJSON);
+		usuario.put("comentariosJSON", comentariosJSON);
+		usuario.put("usuariosJSON", usuariosJSON);
+		
+		try(FileWriter file = new FileWriter("Usuarios.json")){
+			file.write(usuario.toJSONString());
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+			
+  }
   
   
   
   public String getCorreo() {
-	return Correo;
+	return correo;
 }
 
 public void setCorreo(String correo) {
-	Correo = correo;
+	correo = correo;
 }
 
 public String getAlias() {
-	return Alias;
+	return alias;
 }
 
 public void setAlias(String alias) {
-	Alias = alias;
+	alias = alias;
 }
 
 public String getContrasenia() {
-	return Contrasenia;
+	return contrasenia;
 }
 
 public void setContrasenia(String contrasenia) {
-	Contrasenia = contrasenia;
+	contrasenia = contrasenia;
 }
 
 public Comunidad getComunidades() {
-	return Comunidades;
+	return comunidades;
 }
 
 public void setComunidades(Comunidad comunidades) {
-	Comunidades = comunidades;
+	comunidades = comunidades;
 }
 
 public ArrayList<Publicacion> getPublicaciones() {
-	return Publicaciones;
+	return publicaciones;
 }
 
 public void setPublicaciones(ArrayList<Publicacion> publicaciones) {
-	Publicaciones = publicaciones;
+	publicaciones = publicaciones;
 }
 
 public ArrayList<Comentario> getComentarios() {
-	return Comentarios;
+	return comentarios;
 }
 
 public void setComentarios(ArrayList<Comentario> comentarios) {
-	Comentarios = comentarios;
+	comentarios = comentarios;
 }
 
 public ArrayList<Cuenta> getUsuarios() {
-	return Usuarios;
+	return usuarios;
 }
 
 public void setUsuarios(ArrayList<Cuenta> usuarios) {
-	Usuarios = usuarios;
+	usuarios = usuarios;
 }
 
 public Factory_Publicacion getFactoryPublicacion() {
-	return FactoryPublicacion;
+	return factoryPublicacion;
 }
 
 public void setFactoryPublicacion(Factory_Publicacion factoryPublicacion) {
-	FactoryPublicacion = factoryPublicacion;
+	factoryPublicacion = factoryPublicacion;
 }
 
-/** */
-  public Cuenta()
-  {
-  
-  }
-  
-  /** */
-  public void Destroy()
-  {
-  
-  }
   
   /** */
   public void Baja()
   {
-  
+
+	  
   }
   
   /** */
@@ -134,7 +173,7 @@ public void setFactoryPublicacion(Factory_Publicacion factoryPublicacion) {
   /** */
   public void Login(String alias, String contrasenia)
   {
-	 if(alias==this.Alias && contrasenia == this.Contrasenia)
+	 if(alias==this.alias && contrasenia == this.contrasenia)
 		 System.out.println("acceso concedido");
   }
   
