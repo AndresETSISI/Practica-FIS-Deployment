@@ -34,6 +34,7 @@ public class Gestor_Cuenta
   public Gestor_Cuenta()
   {
 	  cuentas = new ArrayList<Cuenta>();
+	  
 	  //Servidor_UPM = new Servidor_UPM();
   }
   
@@ -62,21 +63,21 @@ public void setServidor_UPM(Servidor_UPM servidor_UPM) {
   /** */
   public void Alta()
   {
-	  //creamos Directorio root del JSON donde vamos a añadir las cuentas
+	  //Creamos Directorio root del JSON donde vamos a añadir las cuentas
 	  JSONArray lista_usuarios = new JSONArray();
 	 
-	  //damos de alta una cuenta
+	  //Damos de alta una cuenta
 	  cuentas.add(new Cuenta());
 	  
-	  //creamos el iterator de cuentas
+	  //Creamos el iterator de cuentas
 	  Iterator<Cuenta> iter = cuentas.iterator();
 	  
-	  //añadimos todas las cuentas al directorio root del JSON
+	  //Añadimos todas las cuentas al directorio root del JSON
 	  while(iter.hasNext()) {
 		 lista_usuarios.add(iter.next().guardarDatos());
 	  }
 	  
-	  //actualizamos la información en el fichero JSON
+	  //Actualizamos la información en el fichero JSON
 	  try(FileWriter file = new FileWriter("Usuarios.json")){
 			file.write(lista_usuarios.toJSONString());
 		}catch(IOException e) {

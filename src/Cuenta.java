@@ -51,7 +51,7 @@ public class Cuenta
   private Factory_Publicacion factoryPublicacion;
   
   /** */
-  public Cuenta()
+  public Cuenta() //contructor de cuenta
   {
 	  System.out.println("Escriba Alias:");
 	  this.alias = scan.nextLine();
