@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //
 //
@@ -17,65 +18,65 @@ import java.util.ArrayList;
 /** */
 public class Publicacion implements IPublicacion
 {
+	
+  Scanner scan = new Scanner(System.in);
   /** */
-  private String Contenido;
-  
-  /** */
-  private int Upvotes;
-  
-  /** */
-  private int Downvotes;
+  private String contenido;
   
   /** */
-  private ArrayList<Comentario> Comentarios;
+  private int upvotes;
   
+  /** */
+  private int downvotes;
   
+  /** */
+  private ArrayList<Comentario> comentarios;
+  
+  /** */
+  public Publicacion()
+  {
+	  System.out.println("¿Qué quieres contar al mundo? :");
+	  this.contenido = scan.nextLine();
+	  System.out.println(contenido);
+	  this.upvotes = 0;
+	  this.downvotes = 0;
+	  this.comentarios = new ArrayList<Comentario>();
+  }
   
   
   public String getContenido() {
-	return Contenido;
+	return contenido;
 }
 
 public void setContenido(String contenido) {
-	Contenido = contenido;
+	this.contenido = contenido;
 }
 
 public int getUpvotes() {
-	return Upvotes;
+	return upvotes;
 }
 
 public void setUpvotes(int upvotes) {
-	Upvotes = upvotes;
+	this.upvotes = upvotes;
 }
 
 public int getDownvotes() {
-	return Downvotes;
+	return downvotes;
 }
 
 public void setDownvotes(int downvotes) {
-	Downvotes = downvotes;
+	this.downvotes = downvotes;
 }
 
 public ArrayList<Comentario> getComentarios() {
-	return Comentarios;
+	return comentarios;
 }
 
 public void setComentarios(ArrayList<Comentario> comentarios) {
-	Comentarios = comentarios;
+	this.comentarios = comentarios;
 }
 
-/** */
-  public Publicacion()
-  {
-  
-  }
-  
-  /** */
-  public void Destroy()
-  {
-  
-  }
-  
+
   
   /** */
   public void Borrar()
@@ -83,58 +84,67 @@ public void setComentarios(ArrayList<Comentario> comentarios) {
   
   }
   
+  @Override
+  public String toString() {
+	  return this.contenido + "" + upvotes + "	" + downvotes /*+ comentarios*/;
+   }
+  
   /** */
   public void Mostrar()
   {
-  
+	  System.out.println(toString());
   }
   
   /** */
   public void Mostrar_Timeline()
   {
-  
+	  
   }
   
   /** */
   public void Mostrar_Popularidad()
   {
-  
+	  
   }
   
   /** */
   public void VotarPositivo()
   {
-  
+	  this.upvotes++;
   }
   
   /** */
   public void VotarNegativo()
   {
-  
+	  this.downvotes--;
   }
   
   /** */
-  public void Comprobar_Numero_Caracteres()
+  public boolean Comprobar_Numero_Caracteres()
   {
-  
+	  boolean result = false;
+	  if(this.contenido.length() > 140)
+		  result = true;
+	  return result;
   }
   
   /** */
   public void Insertar_Contenido()
   {
-  
+	  System.out.println("¿Qué quieres contar al mundo? :");
+	  this.contenido = scan.nextLine();
   }
   
   /** */
   public void Notificacion_excede_numero_caracteres()
   {
-  
+	  
   }
   
   /** */
   public void AñadirComentario(Comentario comentario)
   {
-  
+	  
   }
 
   

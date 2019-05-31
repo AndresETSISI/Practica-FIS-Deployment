@@ -50,6 +50,8 @@ public class Cuenta
   /** */
   private Factory_Publicacion factoryPublicacion;
   
+  private boolean logged_in;
+  
   /** */
   public Cuenta() //contructor de cuenta
   {
@@ -64,6 +66,7 @@ public class Cuenta
 	  this.comentarios = new ArrayList<Comentario>();
 	  this.usuarios = new ArrayList<Cuenta>();
 	  //this.factoryPublicacion = new Factory_Publicion();
+	  this.logged_in = false;
 	  
 	  
 	  
@@ -81,6 +84,7 @@ public class Cuenta
 	  this.comentarios = comentarios;
 	  this.usuarios = null;
 	  //this.factoryPublicacion = new Factory_Publicion();
+	  this.logged_in = false;
 	 }
   
   public JSONObject guardarDatos() { //crea el formato JSON de las cuentas y lo devuelve
@@ -91,6 +95,7 @@ public class Cuenta
 		usuario.put("correo", this.correo);
 		usuario.put("contrasenia", this.contrasenia);
 		usuario.put("Comunidades", comunidades);
+		usuario.put("publicaciones", publicaciones);
 		usuario.put("comentarios", comentarios);
 		usuario.put("usuarios", usuarios);
 		
@@ -181,10 +186,14 @@ public void setFactoryPublicacion(Factory_Publicacion factoryPublicacion) {
   }
   
   /** */
-  public void Login(String alias, String contrasenia)
+  public boolean Login(String alias, String contrasenia)
   {
-	 if(alias==this.alias && contrasenia == this.contrasenia)
-		 System.out.println("acceso concedido");
+	 boolean result = false;
+	  
+	 if(this.alias.equals(alias) && this.contrasenia.equals(contrasenia)) {
+		result = true;
+	 }
+	 return result;
   }
   
   /** */
@@ -212,9 +221,10 @@ public void setFactoryPublicacion(Factory_Publicacion factoryPublicacion) {
   }
   
   /** */
-  public void InsertarPublicacion(Publicacion publicacion)
+  public void InsertarPublicacion()
   {
-  
+	  Publicacion pub = new Publicacion();
+	  this.publicaciones.add(pub);
   }
   
   /** */

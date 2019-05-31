@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,6 +28,8 @@ import org.json.simple.parser.ParseException;
 /** */
 public class Gestor_Cuenta
 {
+	
+  private Scanner scan = new Scanner(System.in);	
   /** */
   private ArrayList<Cuenta> cuentas;
   
@@ -86,6 +89,78 @@ public class Gestor_Cuenta
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		int option;
+		do {
+		
+		System.out.println("BIENVENIDO, QUIERE INICIAR SESION O DARSE DE ALTA? :");
+		System.out.println("1- Darse de alta");
+		System.out.println("2- Iniciar Sesion");
+		System.out.println("3- Quiza Otro Dia");
+		
+		option = scan.nextInt();
+		scan.nextLine();
+		
+		switch(option){
+			case 1:
+			{
+				Alta();
+				
+			}break;
+			
+			case 2: {
+				
+				
+				Cuenta cuenta_con_acceso = Login();
+				
+				//se realiza el login
+				if( cuenta_con_acceso != null) {
+					
+					int opcion;
+					
+					do {
+						System.out.println("1- Ver Mis Publicaciones");
+						System.out.println("2- Añadir Una Publicación");
+						System.out.println("3- Borrar Publicación");
+						System.out.println("4- Cerrar Sesión");
+						/*System.out.println("");
+						System.out.println("");*/
+					
+						opcion = scan.nextInt();
+					
+						switch(opcion){
+						
+							case 1:{
+								cuenta_con_acceso.getPublicaciones().toString();
+							}break;
+							
+							case 2:{
+								cuenta_con_acceso.InsertarPublicacion();
+								ActualizarDatos();
+								
+							}break;
+						
+							case 3:{
+							
+							}break;
+							
+							default: System.out.println("Esperamos volver a verte!");
+						}
+					}while(opcion != 4);
+					
+				}
+			}break;
+			
+			default: System.out.println("Estaremos Esperandote :)");
+		}
+		
+  }while(option != 3);
+		
+		
+		
+		
+		
+		
 	  
 	  //Servidor_UPM = new Servidor_UPM();
   }
@@ -107,21 +182,45 @@ public void setServidor_UPM(Servidor_UPM servidor_UPM) {
 }
 
 /** */
-  public void Login(String Alias, String Contraseña)
+  public Cuenta Login()
   {
-  
+	  Cuenta cuenta_con_acceso = null;
+	  Cuenta aux = null;
+	  System.out.println("Introduce Alias:");
+	  String alias = scan.nextLine();
+	  System.out.println("Introduce Contrasenia:");
+	  String contrasenia = scan.nextLine();
+	  
+	  Iterator<Cuenta> iter = cuentas.iterator();
+	  
+	  while(iter.hasNext() && cuenta_con_acceso == null) {
+		  aux = iter.next();
+		  if(aux.Login(alias, contrasenia)) {
+			  cuenta_con_acceso = aux;	System.out.println("Acceso Concedido!");	  
+		  }
+	  }
+	  if (cuenta_con_acceso == null) System.out.println("Accesso no concedido");
+	  
+	  return cuenta_con_acceso;
   }
   
   /** */
   public void Alta()
   {
-	  //Creamos Directorio root del JSON donde vamos a añadir las cuentas
-	  JSONArray lista_usuarios = new JSONArray();
-	 
 	  //Damos de alta una cuenta
 	  cuentas.add(new Cuenta());
 	  
-	  //Creamos el iterator de cuentas
+	  ActualizarDatos();
+	  
+	  
+  }
+  
+  public void ActualizarDatos() {
+	  
+	//Creamos Directorio root del JSON donde vamos a añadir las cuentas
+	  JSONArray lista_usuarios = new JSONArray();
+	  
+	//Creamos el iterator de cuentas
 	  Iterator<Cuenta> iter = cuentas.iterator();
 	  
 	  //Añadimos todas las cuentas al directorio root del JSON
@@ -135,9 +234,7 @@ public void setServidor_UPM(Servidor_UPM servidor_UPM) {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
-	  
   }
-  
  
   /** */
   public void RemoveCuenta(Cuenta cuenta)

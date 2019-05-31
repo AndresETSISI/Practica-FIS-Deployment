@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //
 //
@@ -16,17 +17,19 @@ import java.util.ArrayList;
 
 public class Comentario implements IComentario
 {
+	
+  Scanner scan = new Scanner(System.in);
   /** */
-  private String Contenido;
+  private String contenido;
   
   /** */
-  private ArrayList <Comentario> Respuestas;
+  private ArrayList <Comentario> respuestas;
   
   /** */
-  private Cuenta Cuenta;
+  private Cuenta cuenta;
   
   /** */
-  public Cuenta Escribe_Comentario;
+  public Cuenta escribe_Comentario;
   
   
   
@@ -34,7 +37,12 @@ public class Comentario implements IComentario
   /** */
   public Comentario(String contenido)
   {
-  
+	  
+	  this.contenido = scan.nextLine();
+	  this.respuestas = new ArrayList<Comentario>();
+	  //this.cuenta = new Cuenta();
+	  //this.escribe_Comentario = new Cuenta();
+	  
   }
   
   
@@ -95,41 +103,41 @@ public void SubirComentario() {
 
 
 public String getContenido() {
-	return Contenido;
+	return contenido;
 }
 
 
 public void setContenido(String contenido) {
-	Contenido = contenido;
+	this.contenido = contenido;
 }
 
 
 public ArrayList<Comentario> getRespuestas() {
-	return Respuestas;
+	return respuestas;
 }
 
 
 public void setRespuestas(ArrayList<Comentario> respuestas) {
-	Respuestas = respuestas;
+	this.respuestas = respuestas;
 }
 
 
 public Cuenta getCuenta() {
-	return Cuenta;
+	return cuenta;
 }
 
 
 public void setCuenta(Cuenta cuenta) {
-	Cuenta = cuenta;
+	this.cuenta = cuenta;
 }
 
 
 public Cuenta getEscribe_Comentario() {
-	return Escribe_Comentario;
+	return escribe_Comentario;
 }
 
 
 public void setEscribe_Comentario(Cuenta escribe_Comentario) {
-	Escribe_Comentario = escribe_Comentario;
+	this.escribe_Comentario = escribe_Comentario;
 }
 }

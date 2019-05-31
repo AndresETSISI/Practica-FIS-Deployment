@@ -32,4 +32,5 @@ public interface IPublicacion
   
   /** */
   public void VotarNegativo();
+
 }
