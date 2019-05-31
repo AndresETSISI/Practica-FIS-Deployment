@@ -1,4 +1,9 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.json.simple.JSONArray;
 
 //
 //
@@ -18,20 +23,26 @@ import java.util.ArrayList;
 public class Gestor_Cuenta
 {
   /** */
-  private ArrayList<Cuenta> Cuentas;
+  private ArrayList<Cuenta> cuentas;
   
   /** */
   private Servidor_UPM Servidor_UPM;
   
   
   
+  /** */
+  public Gestor_Cuenta()
+  {
+	  cuentas = new ArrayList<Cuenta>();
+	  //Servidor_UPM = new Servidor_UPM();
+  }
   
   public ArrayList<Cuenta> getCuentas() {
-	return Cuentas;
+	return cuentas;
 }
 
 public void setCuentas(ArrayList<Cuenta> cuentas) {
-	Cuentas = cuentas;
+	this.cuentas = cuentas;
 }
 
 public Servidor_UPM getServidor_UPM() {
@@ -49,9 +60,29 @@ public void setServidor_UPM(Servidor_UPM servidor_UPM) {
   }
   
   /** */
-  public void Alta(String Alias, String Correo, String Contraseña1, String Contraseña2)
+  public void Alta()
   {
-  
+	  //creamos Directorio root del JSON donde vamos a añadir las cuentas
+	  JSONArray lista_usuarios = new JSONArray();
+	 
+	  //damos de alta una cuenta
+	  cuentas.add(new Cuenta());
+	  
+	  //creamos el iterator de cuentas
+	  Iterator<Cuenta> iter = cuentas.iterator();
+	  
+	  //añadimos todas las cuentas al directorio root del JSON
+	  while(iter.hasNext()) {
+		 lista_usuarios.add(iter.next().guardarDatos());
+	  }
+	  
+	  //actualizamos la información en el fichero JSON
+	  try(FileWriter file = new FileWriter("Usuarios.json")){
+			file.write(lista_usuarios.toJSONString());
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	  
   }
   
  
@@ -74,11 +105,6 @@ public void setServidor_UPM(Servidor_UPM servidor_UPM) {
   
   }
   
-  /** */
-  public Gestor_Cuenta()
-  {
-	  
-  }
   
   /** */
   public void Destroy()

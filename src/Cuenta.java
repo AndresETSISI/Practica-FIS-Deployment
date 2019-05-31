@@ -65,12 +65,11 @@ public class Cuenta
 	  this.usuarios = new ArrayList<Cuenta>();
 	  //this.factoryPublicacion = new Factory_Publicion();
 	  
-	  guardarDatos();
 	  
 	  
 	}
   
-  private void guardarDatos() {
+  public JSONObject guardarDatos() { //crea el formato JSON de las cuentas y lo devuelve
 	  
 	  
 	  JSONObject usuario = new JSONObject();
@@ -81,11 +80,9 @@ public class Cuenta
 		usuario.put("comentariosJSON", comentarios);
 		usuario.put("usuariosJSON", usuarios);
 		
-		try(FileWriter file = new FileWriter("Usuarios.json")){
-			file.write(usuario.toJSONString());
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+		
+		
+		return usuario;
 			
   }
   

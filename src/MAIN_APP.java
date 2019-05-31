@@ -2,7 +2,10 @@
 public class MAIN_APP {
 
 	public static void main(String[] args) {
-		Cuenta cuenta1 = new Cuenta();
+		Gestor_Cuenta gestor = new Gestor_Cuenta();
+		
+		gestor.Alta();
+		gestor.Alta();
 			
 	}
 
